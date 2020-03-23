@@ -1,11 +1,13 @@
 package org.gl.demo.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Employee {
+public class Employee{
 	
 	
     @Id
@@ -14,6 +16,11 @@ public class Employee {
 	private String name;
 	private Integer salary;
 	private String designation;
+	
+	
+	public Employee() {
+		
+	}
 	
 
 	
