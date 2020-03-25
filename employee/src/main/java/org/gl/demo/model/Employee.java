@@ -1,7 +1,5 @@
 package org.gl.demo.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,14 +13,7 @@ public class Employee{
 	private Integer id;
 	private String name;
 	private Integer salary;
-	private String designation;
-	
-	
-	public Employee() {
-		
-	}
-	
-
+	private String designation;	
 	
 	public Integer getId() {
 		return id;
@@ -48,7 +39,6 @@ public class Employee{
 	public void setDesignation(String designation) {
 		this.designation = designation;
 	}
-	
 	
 		
 	}

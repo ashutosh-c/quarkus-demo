@@ -1,8 +1,8 @@
 package org.gl.demo.model;
 
-import org.apache.kafka.common.serialization.Serializer;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.apache.kafka.common.serialization.Serializer;
 
 public class EmployeeListSerializer implements Serializer<Iterable<Employee>>{
 

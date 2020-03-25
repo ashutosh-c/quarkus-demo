@@ -2,19 +2,15 @@ package org.gl.demo.sevice;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-
 import org.gl.demo.model.Employee;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import io.quarkus.arc.DefaultBean;
 
-@ApplicationScoped
+@Configuration
 public class BeanCreator {
 	
-	@Produces
-    @DefaultBean
+	@Bean
 	public List<Employee> employeeList(){
 		
 		return new ArrayList<Employee>();

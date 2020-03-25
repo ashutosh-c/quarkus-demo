@@ -1,15 +1,12 @@
 package org.gl.demo.sevice;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import org.apache.zookeeper.common.Time;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.gl.demo.model.Employee;
@@ -53,13 +50,13 @@ public class EmployeeService {
 	}
 
 
-	@Incoming("employeeTopic")
-	@Outgoing("incomingStream")
-	@Broadcast
-	public Employee getFromTopic(Employee employee) {
+	// @Incoming("employeeTopic")
+	// @Outgoing("incomingStream")
+	// @Broadcast
+	// public Employee getFromTopic(Employee employee) {
 
-		return employee;
-	}
+	// 	return employee;
+	// }
 
 	public Iterable<Employee> getAllEmployeeFromDB() {
 		return empRepository.findAll();

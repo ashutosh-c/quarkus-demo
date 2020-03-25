@@ -1,6 +1,5 @@
 package org.gl.demo.resource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,10 +15,7 @@ import javax.ws.rs.core.MediaType;
 import org.gl.demo.model.Employee;
 import org.gl.demo.repository.EmployeeRepository;
 import org.gl.demo.sevice.EmployeeService;
-import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import io.smallrye.reactive.messaging.annotations.Channel;
 
 
 
@@ -32,9 +28,6 @@ public class CompanyResource {
 	    @Autowired
 	    private EmployeeService employeeService;
 	    
-	    @Inject
-	    @Channel("incomingStream") 
-	    Publisher<Employee> incomingStream;
 	    
 		@Inject
 		private List<Employee> employeeList;
