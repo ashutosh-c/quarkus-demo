@@ -1,5 +1,6 @@
 package org.gl.demo.resource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,10 +13,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.reactive.streams.operators.ReactiveStreams;
 import org.gl.demo.model.Employee;
 import org.gl.demo.repository.EmployeeRepository;
 import org.gl.demo.sevice.EmployeeService;
+import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import io.smallrye.reactive.messaging.annotations.Channel;
 
 
 
@@ -32,6 +37,7 @@ public class CompanyResource {
 		@Inject
 		private List<Employee> employeeList;
 
+
 	
 	    @POST
 	    @Produces(MediaType.APPLICATION_JSON)
@@ -42,11 +48,28 @@ public class CompanyResource {
 
 	    
 	    @GET
-	    @Produces(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
 	    public List<Employee> getAllEmployees() {
 	    	employeeService.setTaskNeeded(true);
 	    	return employeeList;
-	    }
+		}
+		
+
+		// @GET
+		// @Produces(MediaType.APPLICATION_JSON)
+		// @Path("/emp")
+	    // public List<Employee> readTopic() {
+		// 	List<Employee> list = new ArrayList<>();
+		// //	incomingStream.toString();
+		// 	ReactiveStreams.fromPublisher(incomingStream).map(i->list.addAll(i));
+
+			
+		// //ReactiveStreams.fromPublisher(incomingStream).flatMapIterable(i->list);
+		//  // return ReactiveStreams.fromPublisher(incomingStream).collect(Collectors.toList());
+        //  return list;
+
+	    // }
+
 	    
 	    
 	    

@@ -7,6 +7,8 @@ import java.util.concurrent.TimeUnit;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 import org.gl.demo.model.Employee;
@@ -30,7 +32,7 @@ public class EmployeeService {
 
 	
 	@Outgoing("employee-channel")
-	public Flowable<KafkaMessage<String,Iterable<Employee>>> pushInTopic2() {
+	public Flowable<KafkaMessage<String,String>> pushInTopic2() {
 
 		return Flowable.interval(500, TimeUnit.MILLISECONDS).onBackpressureDrop().map(tick -> {
 			
@@ -42,21 +44,36 @@ public class EmployeeService {
 			while(!this.isTaskNeeded) {
 				
 			}
-	  	  this.isTaskNeeded=false;
-	  	 return KafkaMessage.of(LocalDate.now().toString(), iterable);
+			this.isTaskNeeded=false;
+			String itearbleStr = convertObjectToString(iterable);
+	  	 return KafkaMessage.of(LocalDate.now().toString(), itearbleStr);
 	  	 
 		});
 
 	}
 
 
-	// @Incoming("employeeTopic")
-	// @Outgoing("incomingStream")
-	// @Broadcast
-	// public Employee getFromTopic(Employee employee) {
+	private String convertObjectToString(Iterable<Employee> iterable){
 
-	// 	return employee;
-	// }
+		  ObjectMapper mapper = new ObjectMapper();
+		  String iterableStr=null ;
+		  try{
+			iterableStr = mapper.writeValueAsString(iterable);
+
+		  }catch(Exception e){
+			e.printStackTrace();
+		  }
+			return iterableStr;
+	}
+
+
+	@Incoming("employeeTopic")
+	@Outgoing("incomingStream")
+	@Broadcast
+	public List<Employee> getFromTopic(List<Employee> employeeList) {
+
+		return employeeList;
+	}
 
 	public Iterable<Employee> getAllEmployeeFromDB() {
 		return empRepository.findAll();
